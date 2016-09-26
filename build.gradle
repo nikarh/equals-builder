@@ -7,11 +7,19 @@ version '0.1-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'jacoco'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jmh {
     jmhVersion = '1.14'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
 }
 
 repositories {
@@ -22,3 +30,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     jmh group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 }
+
+check.dependsOn jacocoTestReport
