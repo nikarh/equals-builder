@@ -1,0 +1,26 @@
+modifyPom {
+    project {
+        name 'equals-builder'
+        description 'Overload your .equals methods without a pretty DSL'
+        url 'http://oss.readytalk.com/swt-bling/'
+        packaging 'jar'
+        licenses {
+            license {
+                name 'MIT License'
+                url 'https://github.com/nikarh/equals-builder/blob/master/LICENSE'
+            }
+        }
+        scm {
+            connection 'scm:git:https://github.com/nikarh/equals-builder'
+            developerConnection 'scm:git:ssh://github.com/nikarh/equals-builder'
+            url 'https://github.com/nikarh/equals-builder'
+        }
+        developers {
+            developer {
+                id 'nikarh'
+                name 'Nikolajs Arhipovs'
+                email 'nikolajs.arhipovs@gmail.com'
+            }
+        }
+    }
+}

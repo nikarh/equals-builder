@@ -13,7 +13,7 @@ import java.util.function.ToLongFunction;
  * Objects are compared by getter methods, which can conveniently be passed
  * as reference methods in Java 8.
  *
- * @param <T>
+ * @param <T> common supertype of objects being compared
  */
 public class EqualsBuilder<T> {
 
@@ -55,10 +55,11 @@ public class EqualsBuilder<T> {
      * <p>
      * B object's type should be a superclass of commonType.
      *
-     * @param a   Typed object to be compared
-     * @param b   Untyped object to be compared
-     * @param <T> Common superclass. In most cases should be inferred.
-     * @param <U> Actual class of first object.
+     * @param a          Typed object to be compared
+     * @param b          Untyped object to be compared
+     * @param commonType Common super class for both a and b objects
+     * @param <T>        Common superclass type. In most cases should be inferred.
+     * @param <U>        Actual class of first object.
      * @return EqualsBuilder instance for T class
      */
     public static <T, U extends T> EqualsBuilder<T> test(U a, Object b, Class<T> commonType) {
