@@ -5,10 +5,20 @@ env:
   global:
     - secure: "Ho+DUhT3AKztIoQ5ocN78rn42vG347L2g9/8qflvNbQqTp6LAPg2/7FIEC3KOKMGWtFXENdYvz2AbP6ksx2QIrXQ6X/OCllFN4dr22aK4D6PN23oEoN534lYBfIfbi7KLlVO4/bPFXgs13YP5ljvx5s8WnkSpP5FKC5EelAQe4N3miS+ekcUg+MNVr8aH+ZgK72LbIrCXQQZjpj3rG2jBM9m2LZerZD7D0wX/k19LbwLu+nIqAo5OndDAZQts/lOdx5jVm6Wa81w0Gbyo6p07gUC4qKADonPxKutZnkoMbl0f1ExXKKpEnLggzjOgmXiP1xvuOsGeB42kANdLuVtNfM3yCDzp9lEEmDTnoBIerhpFi+8i59d5zX13U3k5M6N0ipIovgjd0g86FJCQcRyX07rnxr1bMjI9TJINEkDV4eoInt/aSqB08nEMEBtvxYKnyZzpPjQCeKcDZMhKMbk933kGTTMGySxxmVk81PbjP5LUo6QCJH6/3BAVay5iehV1JMW5ztFE9j0aMTu6E8g7VfU4NOVqVwiabsFVC+nBb5XHK/aWJ2HIzHH+QRdxg7D2ZG5gpUzWEEwSwGhSXPK34v6q78cmM9677+vEaGgdt9AYTWPBX+ne6gQsvcV3SuuoujxEjwR2f73GduLURo71Klc7dLkdiE/26nfn73Gf7c="
     - secure: "ldYTc1X3MtA2eQKnYkAR2VkWZoXGzMA+ZT1TPkIFhk9xN/Rpj3MvzytZrXFL/hGpbh88pv69KnLhKYgqw1p9cvu/qtyWFh+MCB9P0dwt6FY29i5htOnb4lV1wOHqcGbimOscVvkIebfUCOEyEWo/5hqC86x4R54BdaJ+o3PiQjVo3o/DnprzqHsTXiZmuhvPBmULsp923C8dsqYt2jr9PzAozsOHxVbqY6Re0EaV2eESx2fLS6dmk/TrumaYmd41lMTCl0m1HzjIRsEtvaUkt2H8LiawBn/mTK4Ieo/DLdS8OgGdlz0QVLHCkIyEmNU+AZcQ5kBDdncX6kbKClyWIWzwDjUd+1dI6Bsb2XY9PminCndK/E3prJPCs9wsmDQdo87P/Uv4V+eznOiovRvWaxfwxo9mUav2DgbWF7w5zXoPKwviwGBLotr3fTqdMqx/OmJLef8kOiaxsdnjNNw5QjKc04WWlMekVUs3H2ViStWM8AsyiTQzFH6i4rv+/zGVI3cYCGFYg6vpb4SjT4KJvCxcR7OvLMqJFsA5m3jqmYltZaHmKoMNxiRZKg8o6LCvFTHNJ+CdX8nx36gelIU3UNTF9H944cgrzhwUNWGditSZ/76sAx1GAXg3GbTeTEp+asBnaFfpfIqNj9mhViuICnxaMQDJqx9uLKS/RjNmbWg="
-
+    - secure: "FZo9xsEIxR5dXByNPsuY5PSWCQAohpKBcvfX+lHIXjPdR2uOz6YrPBIehtR2BQezY9mpm7rSv+2UmUfiDvdTtqv5+yKf9WMXPXi4RBzAMQR2gHU6qRZxLvxQpzruZta3PzqntRU3cbKl5ROjQkM6FOWFoXCfMDX/kZX5NnUX7yg61LQKJPwNO9zrRQ2j5mmX7pvRfMNkpq9Rvc8FzinhkVIN/ppVvrZIoaRO1ziDuuHhIyFOTdolU48juX5oVjSRtIhYphDQBzVlFNfN2lfBNnqAyvFMnZa2ybAh9AVfULnHdHhG/We5iKiKZfZeeopeeqIl2pPkxYEpNck+2l7RASFsnWUkfqlPI6jC53rsU2KLZAzR8FTiPRrja59fPHt0ceNM8xfOF+YDAoDakG/N73VWWYwYJvTDr2BbyzX6/E6wp1Fvf21kLVKiDbK+lltiTXyu7GFcz7ORdsyvK4+USg8eyQe47yCijAB+E5M/8Vk+h3DeCD9TCW2Lt+O0fcPULiUaQQx68Xf/mq9RBsIWoT2/wP7N/z1WAGEORgYOPLxxLN+wvIrmhOyTz1JKs9sVHBlR9f7AOLoWgadTBZQ9yAiQKOX9CMcw8jSEiTYS75L02CWit+36zJSKUB08WL8mAz6rmfCQt+IEs9Gk2mFRfx7ImeMnOz6WQ8RwWJSrQ2U="
+    - secure: "A2cKQnXwsq1ePXOMOngZ0pBHndOV1hNgHKO1tXB05kECsLa6mthP3ySSaIcEEQTamC5iBPXIcpY87viMrP3BJo5xO11i1+nh6T4D/VJE8MT9Jbmxwk5N0bwLiHDwI8gplWRks4kGSgSk/YtJtD0oE4gveNHS/ei2KxCx/6K1b+4HqjxAFXz1fbiY6Ekr7h8LCQWK5YgNWARIFv4XWl8iJtHM+r7azfQm71fG6K8oz1I+awwvXoD5mHzU3BFuKZV0/L86a1neH52BTYQdUKtu7lBQF/l2nDHIlYAj6m3cn+4RGtU8hjfJC7AtMkV4iKYTHqpffLknHXY8CXnGETwsEZwOT6MOoA8aa7AcC85N03Ckxaq7V8ehKLoHVCfqDFaphB5qrAr/9WdtRBx6LUaIiIOdfPM9fWMi0LARtiaszDRZwGqJ4+zHTcAmW6e252qF5k+RiigJfv+IsoKPsrjnIICS7bMQ42nSVazhIR1MiSSsKp/PiMjOkTRi7/43E3nCSNR7e6pmZO4uJBgVYTCF5totCOULt9qgc4xOVNhP9E5DKMxdWqzxGgRRLCmKPad9Fm5RXYIX6KI4Ca8lIxHkH6Bj97yqwwV2r+0FcZ6OBHGKO1+GfFW1B50xZSCeY62kq8kRGO0St0l819NvLTY1WdUDZaTw5mq5P8pAZBUi3GI="
 jdk:
   - oraclejdk8
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_6ccd38ee2e97_key -iv $encrypted_6ccd38ee2e97_iv -in secring.gpg.enc -out secring.gpg -d
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./gradlew uploadArchives -PnexusUsername=${NEXUS_USERNAME} -PnexusPassword=${NEXUS_PASSWORD}; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+      ./gradlew uploadArchives -PnexusUsername=${NEXUS_USERNAME}
+                               -PnexusPassword=${NEXUS_PASSWORD}
+                               -Psigning.keyId=${SIGNING_KEYID}
+                               -Psigning.password=${SIGNING_PASSWORD}
+                               -Psigning.secretKeyRingFile=${TRAVIS_BUILD_DIR}/secring.gpg;
+     fi'
+  - rm ./secring.gpg
