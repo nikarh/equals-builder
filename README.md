@@ -3,6 +3,7 @@ equals-builder: fluent builder API for you .equals() methods
 
 [![Build Status](https://img.shields.io/travis/nikarh/equals-builder.svg)](https://travis-ci.org/nikarh/equals-builder)
 [![Code Coverage](https://img.shields.io/codecov/c/github/nikarh/equals-builder.svg)](https://codecov.io/gh/nikarh/equals-builder)
+[![Maven Central](https://img.shields.io/maven-central/v/net.arhipov/equals-builder.svg)](https://maven-badges.herokuapp.com/maven-central/net.arhipov/equals-builder)
 
 What is equals-builder?
 -----------------------
