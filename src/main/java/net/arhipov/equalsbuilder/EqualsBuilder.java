@@ -1,6 +1,7 @@
 package net.arhipov.equalsbuilder;
 
 import java.util.Objects;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
@@ -73,12 +74,33 @@ public class EqualsBuilder<T> {
      * @return EqualsBuilder instance
      */
     public EqualsBuilder<T> comparing(Function<T, ?> getter) {
-        if (!skip && !Objects.equals(getter.apply(a), getter.apply(b))) {
+        return comparing(getter, Objects::equals);
+    }
+
+    /**
+     * Compare objects fields using getter and a defined comparing function.
+     * This should be used to compare objects for equality deeply:
+     *
+     * {@code
+     *     EqualsBuilder.test(first, second)
+     *         .comparing(MyClass::getInnerObject, (a, b) -> EqualsBuilder.test(a, b)
+     *             .comparing(InnerClass::getFirstField)
+     *             .areEqual())
+     *         .areEqual();
+     * }
+     *
+     * @param getter    getter method for objects field
+     * @param equalizer function used to compare two objects
+     * @return EqualsBuilder instance
+     */
+    public <R> EqualsBuilder<T> comparing(Function<T, R> getter, BiPredicate<R, R> equalizer) {
+        if (!skip && !equalizer.test(getter.apply(a), getter.apply(b))) {
             skip = true;
             equal = false;
         }
         return this;
     }
+
 
     /**
      * Compare objects primitive int fields.

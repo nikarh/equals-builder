@@ -8,18 +8,18 @@ import static org.junit.Assert.*;
 public class EqualsBuilderTest {
 
     interface Identifiable {
-        int getHouse();
+        int getId();
     }
 
     private static class Person implements Identifiable {
-        private final int house;
+        private final int id;
 
-        Person(int house) {
-            this.house = house;
+        Person(int id) {
+            this.id = id;
         }
 
-        public int getHouse() {
-            return house;
+        public int getId() {
+            return id;
         }
     }
 
@@ -41,7 +41,7 @@ public class EqualsBuilderTest {
         }
 
         @Override
-        public int getHouse() {
+        public int getId() {
             return house;
         }
 
@@ -81,7 +81,7 @@ public class EqualsBuilderTest {
         Address address2 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere else");
 
         assertTrue(EqualsBuilder.test(address1, address2)
-                .comparing(Address::getHouse)
+                .comparing(Address::getId)
                 .areEqual());
         assertTrue(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getLongitude)
@@ -98,7 +98,7 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertTrue(EqualsBuilder.test(address1, address2)
-                .comparing(Address::getHouse)
+                .comparing(Address::getId)
                 .comparing(Address::getStreet)
                 .comparing(Address::getLongitude)
                 .comparing(Address::getLatitude)
@@ -110,7 +110,7 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
-                .comparing(Address::getHouse)
+                .comparing(Address::getId)
                 .comparing(Address::getCity)
                 .comparing(Address::getStreet)
                 .comparing(Address::getLongitude)
@@ -119,7 +119,7 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertTrue(EqualsBuilder.test(address1, address2)
-                .comparing(Identifiable::getHouse)
+                .comparing(Identifiable::getId)
                 .areEqual());
     }
 
@@ -129,11 +129,11 @@ public class EqualsBuilderTest {
         Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
 
         assertTrue(EqualsBuilder.test(person, address, Identifiable.class)
-                .comparing(Identifiable::getHouse)
+                .comparing(Identifiable::getId)
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(person, address)
-                .comparing(Identifiable::getHouse)
+                .comparing(Identifiable::getId)
                 .areEqual());
     }
 
@@ -155,7 +155,7 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
-                .comparing(Address::getHouse)
+                .comparing(Address::getId)
                 .comparing(Address::getCity)
                 .comparing(Address::getLatitude)
                 .areEqual());
@@ -165,6 +165,61 @@ public class EqualsBuilderTest {
                 .comparing(Address::getCity)
                 .comparing(Address::getLatitude)
                 .areEqual());
+    }
+
+    private static class Registry {
+        private final Address address;
+        private final Person person;
+
+        public Registry(Address address, Person person) {
+            this.address = address;
+            this.person = person;
+        }
+
+        public Address getAddress() {
+            return address;
+        }
+
+        public Person getPerson() {
+            return person;
+        }
+    }
+
+    @Test
+    public void deepCompare() {
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "first", "Somewhere else");
+        Person person1 = new Person(1);
+        Person person2 = new Person(1);
+
+        Registry registry1 = new Registry(address1, person1);
+        Registry registry2 = new Registry(address2, person2);
+
+        assertTrue(EqualsBuilder.test(registry1, registry2)
+                .comparing(Registry::getAddress, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .comparing(Address::getLatitude)
+                        .comparing(Address::getLongitude)
+                        .comparing(Address::getStreet)
+                        .areEqual())
+                .comparing(Registry::getPerson, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(registry1, registry2)
+                .comparing(Registry::getPerson, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .comparing(Registry::getAddress, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .comparing(Address::getLatitude)
+                        .comparing(Address::getLongitude)
+                        .comparing(Address::getStreet)
+                        .comparing(Address::getCity)
+                        .areEqual())
+                .areEqual());
+
     }
 
 }
