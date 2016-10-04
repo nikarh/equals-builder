@@ -18,6 +18,7 @@ public class EqualsBuilderTest {
             this.id = id;
         }
 
+        @Override
         public int getId() {
             return id;
         }
@@ -31,7 +32,7 @@ public class EqualsBuilderTest {
         private final String street;
         private final String city;
 
-        public Address(int house, long phone, float latitude, double longitude, String street, String city) {
+        Address(int house, long phone, float latitude, double longitude, String street, String city) {
             this.house = house;
             this.phone = phone;
             this.latitude = latitude;
@@ -68,7 +69,7 @@ public class EqualsBuilderTest {
 
 
     @Test
-    public void comapreSameObjects() {
+    public void compareSameObjects() {
         Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
 
         assertTrue(EqualsBuilder.test(address1, address1)
@@ -76,7 +77,7 @@ public class EqualsBuilderTest {
     }
 
     @Test
-    public void comapreSameClass() {
+    public void compareSameClass() {
         Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
         Address address2 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere else");
 
@@ -119,6 +120,41 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertTrue(EqualsBuilder.test(address1, address2)
+                .comparing(Identifiable::getId)
+                .areEqual());
+    }
+
+
+    @Test
+    public void nullChecks() {
+        Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+
+        assertTrue(EqualsBuilder.test((Address) null, null)
+                .comparing(Address::getCity)
+                .comparing(Address::getId)
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(null, null, Address.class)
+                .comparing(Address::getCity)
+                .comparing(Address::getId)
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(address, null)
+                .comparing(Address::getCity)
+                .comparing(Address::getId)
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test((Address) null, address)
+                .comparing(Address::getCity)
+                .comparing(Address::getId)
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(null, address, Address.class)
+                .comparing(Address::getCity)
+                .comparing(Address::getId)
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(address, null, Identifiable.class)
                 .comparing(Identifiable::getId)
                 .areEqual());
     }
@@ -171,7 +207,7 @@ public class EqualsBuilderTest {
         private final Address address;
         private final Person person;
 
-        public Registry(Address address, Person person) {
+        Registry(Address address, Person person) {
             this.address = address;
             this.person = person;
         }

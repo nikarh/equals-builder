@@ -27,7 +27,7 @@ public class EqualsBuilder<T> {
     private EqualsBuilder(T a, Object b, Class<T> commonType) {
         if (a == b) {
             skip = true;
-        } else if (!commonType.isAssignableFrom(b.getClass())) {
+        } else if (a == null || b == null || !commonType.isAssignableFrom(b.getClass())) {
             equal = false;
             skip = true;
         } else {
@@ -48,7 +48,7 @@ public class EqualsBuilder<T> {
      */
     @SuppressWarnings("unchecked")
     public static <T> EqualsBuilder<T> test(T a, Object b) {
-        return new EqualsBuilder<>(a, b, (Class<T>) a.getClass());
+        return new EqualsBuilder<>(a, b, a == null ? null : (Class<T>) a.getClass());
     }
 
     /**
@@ -91,6 +91,7 @@ public class EqualsBuilder<T> {
      *
      * @param getter    getter method for objects field
      * @param equalizer function used to compare two objects
+     * @param <R>       type of an object returned by the getter
      * @return EqualsBuilder instance
      */
     public <R> EqualsBuilder<T> comparing(Function<T, R> getter, BiPredicate<R, R> equalizer) {
@@ -100,7 +101,6 @@ public class EqualsBuilder<T> {
         }
         return this;
     }
-
 
     /**
      * Compare objects primitive int fields.
