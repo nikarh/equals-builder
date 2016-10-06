@@ -84,7 +84,7 @@ public class EqualsBuilder<T> {
     }
 
     /**
-     * Creates EqualsBuilder instance for two objects.
+     * Creates a new EqualsBuilder instance for two objects.
      * For objects to be equal, b should be the same type as a.
      *
      * @param a   Typed object to be compared
@@ -98,8 +98,7 @@ public class EqualsBuilder<T> {
     }
 
     /**
-     * Creates EqualsBuilder instance for two objects comparing a common superclass.
-     * B object's type should be a superclass of commonType.
+     * Creates a new EqualsBuilder instance for two objects sharing a common superclass.
      *
      * @param a          Typed object to be compared
      * @param b          Untyped object to be compared

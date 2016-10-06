@@ -7,6 +7,7 @@ env:
     - secure: "ldYTc1X3MtA2eQKnYkAR2VkWZoXGzMA+ZT1TPkIFhk9xN/Rpj3MvzytZrXFL/hGpbh88pv69KnLhKYgqw1p9cvu/qtyWFh+MCB9P0dwt6FY29i5htOnb4lV1wOHqcGbimOscVvkIebfUCOEyEWo/5hqC86x4R54BdaJ+o3PiQjVo3o/DnprzqHsTXiZmuhvPBmULsp923C8dsqYt2jr9PzAozsOHxVbqY6Re0EaV2eESx2fLS6dmk/TrumaYmd41lMTCl0m1HzjIRsEtvaUkt2H8LiawBn/mTK4Ieo/DLdS8OgGdlz0QVLHCkIyEmNU+AZcQ5kBDdncX6kbKClyWIWzwDjUd+1dI6Bsb2XY9PminCndK/E3prJPCs9wsmDQdo87P/Uv4V+eznOiovRvWaxfwxo9mUav2DgbWF7w5zXoPKwviwGBLotr3fTqdMqx/OmJLef8kOiaxsdnjNNw5QjKc04WWlMekVUs3H2ViStWM8AsyiTQzFH6i4rv+/zGVI3cYCGFYg6vpb4SjT4KJvCxcR7OvLMqJFsA5m3jqmYltZaHmKoMNxiRZKg8o6LCvFTHNJ+CdX8nx36gelIU3UNTF9H944cgrzhwUNWGditSZ/76sAx1GAXg3GbTeTEp+asBnaFfpfIqNj9mhViuICnxaMQDJqx9uLKS/RjNmbWg="
     - secure: "FZo9xsEIxR5dXByNPsuY5PSWCQAohpKBcvfX+lHIXjPdR2uOz6YrPBIehtR2BQezY9mpm7rSv+2UmUfiDvdTtqv5+yKf9WMXPXi4RBzAMQR2gHU6qRZxLvxQpzruZta3PzqntRU3cbKl5ROjQkM6FOWFoXCfMDX/kZX5NnUX7yg61LQKJPwNO9zrRQ2j5mmX7pvRfMNkpq9Rvc8FzinhkVIN/ppVvrZIoaRO1ziDuuHhIyFOTdolU48juX5oVjSRtIhYphDQBzVlFNfN2lfBNnqAyvFMnZa2ybAh9AVfULnHdHhG/We5iKiKZfZeeopeeqIl2pPkxYEpNck+2l7RASFsnWUkfqlPI6jC53rsU2KLZAzR8FTiPRrja59fPHt0ceNM8xfOF+YDAoDakG/N73VWWYwYJvTDr2BbyzX6/E6wp1Fvf21kLVKiDbK+lltiTXyu7GFcz7ORdsyvK4+USg8eyQe47yCijAB+E5M/8Vk+h3DeCD9TCW2Lt+O0fcPULiUaQQx68Xf/mq9RBsIWoT2/wP7N/z1WAGEORgYOPLxxLN+wvIrmhOyTz1JKs9sVHBlR9f7AOLoWgadTBZQ9yAiQKOX9CMcw8jSEiTYS75L02CWit+36zJSKUB08WL8mAz6rmfCQt+IEs9Gk2mFRfx7ImeMnOz6WQ8RwWJSrQ2U="
     - secure: "A2cKQnXwsq1ePXOMOngZ0pBHndOV1hNgHKO1tXB05kECsLa6mthP3ySSaIcEEQTamC5iBPXIcpY87viMrP3BJo5xO11i1+nh6T4D/VJE8MT9Jbmxwk5N0bwLiHDwI8gplWRks4kGSgSk/YtJtD0oE4gveNHS/ei2KxCx/6K1b+4HqjxAFXz1fbiY6Ekr7h8LCQWK5YgNWARIFv4XWl8iJtHM+r7azfQm71fG6K8oz1I+awwvXoD5mHzU3BFuKZV0/L86a1neH52BTYQdUKtu7lBQF/l2nDHIlYAj6m3cn+4RGtU8hjfJC7AtMkV4iKYTHqpffLknHXY8CXnGETwsEZwOT6MOoA8aa7AcC85N03Ckxaq7V8ehKLoHVCfqDFaphB5qrAr/9WdtRBx6LUaIiIOdfPM9fWMi0LARtiaszDRZwGqJ4+zHTcAmW6e252qF5k+RiigJfv+IsoKPsrjnIICS7bMQ42nSVazhIR1MiSSsKp/PiMjOkTRi7/43E3nCSNR7e6pmZO4uJBgVYTCF5totCOULt9qgc4xOVNhP9E5DKMxdWqzxGgRRLCmKPad9Fm5RXYIX6KI4Ca8lIxHkH6Bj97yqwwV2r+0FcZ6OBHGKO1+GfFW1B50xZSCeY62kq8kRGO0St0l819NvLTY1WdUDZaTw5mq5P8pAZBUi3GI="
+    - secure: "Q5NV2ySHj0+b4tQrONCI8EXksdy3lzJzY+RKWAQlTTnkQE3hs05VGXUS6Ep8rFyvp+4GMFxTwBUs/KvnNSmLqNaOHlgP8FMx6qkfjrZWgZkIPLCiNyA0HM4tDdBgLVCN8Ch+CRxkOFTh5DzoSV8KfyRJAV8BO2OVJS8gULlb6GF7TtoalNxf0XeSgq0xUgBz7VRSLgzVEL7gehYO1WniEFRqr3+kR2GO9BzF73fuWlW4ADn/upIcH9teIXMMfkKKismR+dVvIHDOiIhxi83a9NudnGqXbn4R1HoPW1SMDvvUZ/8SLv5KTDtMhlAsMwGZNKnFT/YqVpRc7kdFH8Xd5N5qY+iQoXkTd19L8+7h+T4Rq3pvKXelJh9kPUyX15gFTjg/2mFL2smO3+5A5MkEy/aOMpZ/UAB6KQPh1r9P+PHfyoJ9SYTIYDLoEb3WbGfwBjyZBvutF+j8u5cmOz3thHwTjyF7UNr3UvCe8gaEvVpNmzzi0bItEWiyE17tQz9gpMu24hzn3F1oeecH+pza2A6uXUpVb8I67UGO/WyuBQjiDagFKypltSi6+NjtLlCN8xblg6Sl0njN9ODWBtNyYjlEEDR6TqLyanHCIMxl2qbDMh4PFa3Eoxn4SuSis9TH3YBh70wdn5HOdOEMtPndHLmZC2Obp0uyCMndJqVJYQY="
 jdk:
   - oraclejdk8
 
@@ -14,11 +15,28 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_6ccd38ee2e97_key -iv $encrypted_6ccd38ee2e97_iv -in secring.gpg.enc -out secring.gpg -d
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  - 'if [ "$TRAVIS_REPO_SLUG" == "nikarh/equals-builder" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
       ./gradlew uploadArchives -PnexusUsername=${NEXUS_USERNAME}
                                -PnexusPassword=${NEXUS_PASSWORD}
                                -Psigning.keyId=${SIGNING_KEYID}
                                -Psigning.password=${SIGNING_PASSWORD}
                                -Psigning.secretKeyRingFile=${TRAVIS_BUILD_DIR}/secring.gpg;
+
+      echo -e "Publishing javadoc...\n";
+      cp -R build/docs/javadoc $HOME/javadoc-latest;
+
+      cd $HOME;
+      git config --global user.email "travis@travis-ci.org";
+      git config --global user.name "travis-ci";
+      git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nikarh/equals-builder gh-pages > /dev/null;
+
+      cd gh-pages;
+      git rm -rf ./javadoc;
+      cp -Rf $HOME/javadoc-latest ./javadoc;
+      git add -f .;
+      git commit -m "Latest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages";
+      git push -fq origin gh-pages > /dev/null;
+      echo -e "Published Javadoc to gh-pages.\n";
+
      fi'
   - rm ./secring.gpg
