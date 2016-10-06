@@ -316,6 +316,12 @@ public class EqualsBuilderTest {
                         .areEqual())
                 .areEqual());
 
+        assertFalse(EqualsBuilder.test(new Humanity(emptyList()), null)
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
         Person person1 = new Person(1);
         Person person2 = new Person(1);
         Person person3 = new Person(2);
@@ -373,6 +379,12 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(new Humanity(emptyList()), new Humanity())
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(emptyList()), null)
                 .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
                         .comparing(Person::getId)
                         .areEqual())
@@ -450,6 +462,12 @@ public class EqualsBuilderTest {
                         .areEqual())
                 .areEqual());
 
+        assertFalse(EqualsBuilder.test(new Index(emptyList()), null)
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
         Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
         Address address2 = new Address(2, 123123L, 23.4F, 25.6, "second", "Somewhere else");
         Address address3 = new Address(1, 123123L, 23.4F, 25.6, "third", "Somewhere");
@@ -491,6 +509,12 @@ public class EqualsBuilderTest {
         map2.put(1, null);
 
         assertTrue(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+                .comparingMaps(AtomicReference::get, Objects::equals)
+                .areEqual());
+
+        map2.replace(null, 1);
+
+        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
                 .comparingMaps(AtomicReference::get, Objects::equals)
                 .areEqual());
 

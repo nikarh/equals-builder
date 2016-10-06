@@ -3,7 +3,7 @@ package net.arhipov.equalsbuilder;
 import java.util.Iterator;
 import java.util.function.BiPredicate;
 
-class EqualsUtils {
+final class EqualsUtils {
 
     static <T> boolean areEqual(Iterable<T> a, Iterable<T> b, BiPredicate<T, T> equalizer) {
         Iterator<T> aIterator = a.iterator();
