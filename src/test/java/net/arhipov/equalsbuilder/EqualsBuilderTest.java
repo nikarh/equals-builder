@@ -3,6 +3,16 @@ package net.arhipov.equalsbuilder;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static java.util.function.Function.*;
+import static java.util.stream.Collectors.*;
 import static org.junit.Assert.*;
 
 public class EqualsBuilderTest {
@@ -258,4 +268,243 @@ public class EqualsBuilderTest {
 
     }
 
+    static class Humanity {
+        private final List<Person> people;
+
+        Humanity() {
+            this.people = null;
+        }
+
+        Humanity(List<Person> people) {
+            this.people = people;
+        }
+
+        public List<Person> getPeople() {
+            return people;
+        }
+    }
+
+    @Test
+    public void compareWithCollections() {
+        assertTrue(EqualsBuilder.test(new Humanity(), new Humanity())
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(emptyList()), new Humanity(emptyList()))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(emptyList()), new Humanity(emptyList()))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(), new Humanity(emptyList()))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(emptyList()), new Humanity())
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        Person person1 = new Person(1);
+        Person person2 = new Person(1);
+        Person person3 = new Person(2);
+        Person person4 = new Person(2);
+
+        assertTrue(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person1, person3)))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person2, person4)))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person2)))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(asList(person1, person1)), new Humanity(asList(person2, person4)))
+                .comparingCollections(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+    }
+
+    @Test
+    public void compareWithIterables() {
+        assertTrue(EqualsBuilder.test(new Humanity(), new Humanity())
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(emptyList()), new Humanity(emptyList()))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(emptyList()), new Humanity(emptyList()))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(), new Humanity(emptyList()))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(emptyList()), new Humanity())
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        Person person1 = new Person(1);
+        Person person2 = new Person(1);
+        Person person3 = new Person(2);
+        Person person4 = new Person(2);
+
+        assertTrue(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person1, person3)))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person2, person4)))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(asList(person1, person3)), new Humanity(asList(person2)))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Humanity(asList(person1, person1)), new Humanity(asList(person2, person4)))
+                .comparingIterables(Humanity::getPeople, (p1, p2) -> EqualsBuilder.test(p1, p2)
+                        .comparing(Person::getId)
+                        .areEqual())
+                .areEqual());
+    }
+
+    static class Index {
+        private final Map<Integer, Address> addressMap;
+
+        public Index() {
+            this.addressMap = null;
+        }
+
+        public Index(List<Address> addresses) {
+            this.addressMap = addresses.stream().collect(toMap(Address::getId, identity()));
+        }
+
+        public Map<Integer, Address> getAddressMap() {
+            return addressMap;
+        }
+    }
+
+    @Test
+    public void compareWithMaps() {
+        assertTrue(EqualsBuilder.test(new Index(), new Index())
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Index(emptyList()), new Index(emptyList()))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Index(), new Index(emptyList()))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Index(emptyList()), new Index())
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "second", "Somewhere else");
+        Address address3 = new Address(1, 123123L, 23.4F, 25.6, "third", "Somewhere");
+        Address address4 = new Address(2, 123123L, 23.4F, 25.6, "forth", "Somewhere else");
+
+        assertTrue(EqualsBuilder.test(new Index(asList(address1, address2)), new Index(asList(address1, address2)))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertTrue(EqualsBuilder.test(new Index(asList(address1, address2)), new Index(asList(address3, address4)))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Index(asList(address1)), new Index(emptyList()))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .areEqual())
+                .areEqual());
+
+        assertFalse(EqualsBuilder.test(new Index(asList(address1, address2)), new Index(asList(address3, address4)))
+                .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
+                        .comparing(Address::getPhone)
+                        .comparing(Address::getStreet)
+                        .areEqual())
+                .areEqual());
+    }
+
+    @Test
+    public void compareWithMapsHavingNullKeysAndNullValues() {
+        Map<Integer, Integer> map1 = new HashMap<>();
+        Map<Integer, Integer> map2 = new HashMap<>();
+        map1.put(null, null);
+        map1.put(1, null);
+        map2.put(null, null);
+        map2.put(1, null);
+
+        assertTrue(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+                .comparingMaps(AtomicReference::get, Objects::equals)
+                .areEqual());
+
+        map1.remove(null);
+
+        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+                .comparingMaps(AtomicReference::get, Objects::equals)
+                .areEqual());
+
+        map2.remove(null);
+        map2.replace(1, 42);
+
+        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+                .comparingMaps(AtomicReference::get, Objects::equals)
+                .areEqual());
+    }
 }
