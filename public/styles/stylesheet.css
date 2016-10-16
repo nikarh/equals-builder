@@ -59,6 +59,7 @@ h1 {
       margin-left: 0; } }
 
 .page-header {
+  position: relative;
   color: #fff;
   background-color: #155799; }
 
@@ -71,11 +72,17 @@ h1 {
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .page-header {
-    padding: 1rem 4rem; } }
+    padding: 1rem 4rem; }
+  .fork-badge img {
+    max-height: 100%;
+  } }
 
 @media screen and (max-width: 42em) {
   .page-header {
-    padding: 1rem; } }
+    padding: 1rem; }
+  .fork-badge {
+    display: none;
+  } }
 
 .project-name {
   margin-top: 0;
