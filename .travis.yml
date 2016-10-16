@@ -15,19 +15,33 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_6ccd38ee2e97_key -iv $encrypted_6ccd38ee2e97_iv -in secring.gpg.enc -out secring.gpg -d
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - 'if [ "$TRAVIS_REPO_SLUG" == "nikarh/equals-builder" ] && \
-        [ "$TRAVIS_PULL_REQUEST" = "false" ] && \
+  - 'if [ "$TRAVIS_REPO_SLUG" == "nikarh/equals-builder" ] &&
+        [ "$TRAVIS_PULL_REQUEST" = "false" ] &&
         [ "$TRAVIS_BRANCH" == "master" ]; then
       ./gradlew uploadArchives -PnexusUsername=${NEXUS_USERNAME}
                                -PnexusPassword=${NEXUS_PASSWORD}
                                -Psigning.keyId=${SIGNING_KEYID}
                                -Psigning.password=${SIGNING_PASSWORD}
-                               -Psigning.secretKeyRingFile=${TRAVIS_BUILD`_DIR}/secring.gpg;
+                               -Psigning.secretKeyRingFile=${TRAVIS_BUILD_DIR}/secring.gpg;
 
-      if [ -n $TRAVIS_TAG ]; then
+      if [ -z $TRAVIS_TAG ]; then
+        echo -e "Updating gh-pages...\n";
+        cp README.md $HOME/content.md;
+        cd $HOME;
+        git config --global user.email "travis@travis-ci.org";
+        git config --global user.name "travis-ci";
+        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nikarh/equals-builder gh-pages > /dev/null;
+
+        cd gh-pages;
+        cp $HOME/content.md ./_includes/content.md;
+        git add -f .;
+        git commit -m "Refreshed content.md on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages";
+        git push -fq origin gh-pages > /dev/null;
+        echo -e "Updated gh-pages.\n";
+      else
         echo -e "Publishing javadoc...\n";
         cp -R build/docs/javadoc $HOME/javadoc-latest;
-        cp README.md $HOME/content.md
+        cp README.md $HOME/content.md;
 
         cd $HOME;
         git config --global user.email "travis@travis-ci.org";
@@ -36,33 +50,19 @@ after_success:
 
         cd gh-pages;
         cp -Rf $HOME/javadoc-latest ./javadoc/$TRAVIS_TAG;
-        cp $HOME/content.md ./_includes/content.md
-        echo "<!DOCTYPE html>
+        cp $HOME/content.md ./_includes/content.md;
+        echo ''<!DOCTYPE html>
                <html>
                <head>
                    <title>JavaDoc</title>
-                   <meta http-equiv=\"refresh\"
-                         content=\"0; url=http://arhipov.net/equals-builder/javadoc/$TRAVIS_TAG/\" />
+                   <meta http-equiv="refresh"
+                         content="0; url=http://arhipov.net/equals-builder/javadoc/''$TRAVIS_TAG''/" />
                </head>
-               </html>" > ./javadoc/latest/index.html
+               </html>'' > ./javadoc/latest/index.html;
         git add -f .;
         git commit -m "Latest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages";
         git push -fq origin gh-pages > /dev/null;
         echo -e "Published Javadoc to gh-pages.\n";
-      else
-        echo -e "Updating gh-pages...\n";
-        cp README.md $HOME/content.md
-        cd $HOME;
-        git config --global user.email "travis@travis-ci.org";
-        git config --global user.name "travis-ci";
-        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nikarh/equals-builder gh-pages > /dev/null;
-
-        cd gh-pages;
-        cp $HOME/content.md ./_includes/content.md
-        git add -f .;
-        git commit -m "Refreshed content.md on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages";
-        git push -fq origin gh-pages > /dev/null;
-        echo -e "Updated gh-pages.\n";
       fi
      fi'
   - rm ./secring.gpg
