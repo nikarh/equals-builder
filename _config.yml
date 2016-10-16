@@ -1,2 +1,7 @@
 gems:
   - jekyll-seo-tag
+
+title: EqualsBuilder - A fluent builder API for object comparison in Java
+description: >
+  Perform deep comparison with different strategies and overload
+  your .equals methods in Java using a fluent builder API.
