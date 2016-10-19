@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -314,6 +315,20 @@ public class EqualsBuilder<T> {
      */
     public EqualsBuilder<T> comparing(ToDoubleFunction<T> getter) {
         if (!skip && getter.applyAsDouble(a) != getter.applyAsDouble(b)) {
+            skip = true;
+            equal = false;
+        }
+        return this;
+    }
+
+    /**
+     * Compare primitive boolean fields of both objects.
+     *
+     * @param getter a method applied to both objects to extract boolean field (usually getter)
+     * @return EqualsBuilder instance
+     */
+    public EqualsBuilder<T> comparing(Predicate<T> getter) {
+        if (!skip && getter.test(a) != getter.test(b)) {
             skip = true;
             equal = false;
         }

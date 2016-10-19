@@ -39,16 +39,18 @@ public class EqualsBuilderTest {
         private final long phone;
         private final float latitude;
         private final double longitude;
+        private final boolean existing;
         private final String street;
         private final String city;
 
-        Address(int house, long phone, float latitude, double longitude, String street, String city) {
+        Address(int house, long phone, float latitude, double longitude, String street, String city, boolean existing) {
             this.house = house;
             this.phone = phone;
             this.latitude = latitude;
             this.longitude = longitude;
             this.street = street;
             this.city = city;
+            this.existing = existing;
         }
 
         @Override
@@ -75,12 +77,16 @@ public class EqualsBuilderTest {
         public String getCity() {
             return city;
         }
+
+        public boolean isExisting() {
+            return this.existing;
+        }
     }
 
 
     @Test
     public void compareSameObjects() {
-        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", true);
 
         assertTrue(EqualsBuilder.test(address1, address1)
                 .areEqual());
@@ -88,8 +94,8 @@ public class EqualsBuilderTest {
 
     @Test
     public void compareSameClass() {
-        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
-        Address address2 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere else");
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", true);
+        Address address2 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere else", true);
 
         assertTrue(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getId)
@@ -103,7 +109,9 @@ public class EqualsBuilderTest {
         assertTrue(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getPhone)
                 .areEqual());
-
+        assertTrue(EqualsBuilder.test(address1, address2)
+                .comparing(Address::isExisting)
+                .areEqual());
         assertTrue(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getStreet)
                 .areEqual());
@@ -114,6 +122,7 @@ public class EqualsBuilderTest {
                 .comparing(Address::getLongitude)
                 .comparing(Address::getLatitude)
                 .comparing(Address::getPhone)
+                .comparing(Address::isExisting)
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
@@ -121,6 +130,7 @@ public class EqualsBuilderTest {
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
+                .comparing(Address::isExisting)
                 .comparing(Address::getId)
                 .comparing(Address::getCity)
                 .comparing(Address::getStreet)
@@ -137,7 +147,7 @@ public class EqualsBuilderTest {
 
     @Test
     public void nullChecks() {
-        Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+        Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", false);
 
         assertTrue(EqualsBuilder.test((Address) null, null)
                 .comparing(Address::getCity)
@@ -172,7 +182,7 @@ public class EqualsBuilderTest {
     @Test
     public void compareByCommonSuperType() {
         Person person = new Person(1);
-        Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
+        Address address = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", false);
 
         assertTrue(EqualsBuilder.test(person, address, Identifiable.class)
                 .comparing(Identifiable::getId)
@@ -185,32 +195,43 @@ public class EqualsBuilderTest {
 
     @Test
     public void compareDifferentValues() {
-        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
-        Address address2 = new Address(2, 432321L, 24.4F, 26.6, "first", "Somewhere else");
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", true);
+        Address address2 = new Address(2, 432321L, 24.4F, 26.6, "first", "Somewhere else", false);
 
         assertFalse(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getLatitude)
                 .comparing(Address::getCity)
                 .comparing(Address::getLongitude)
+            .comparing(Address::isExisting)
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getLongitude)
                 .comparing(Address::getCity)
                 .comparing(Address::getLatitude)
+            .comparing(Address::isExisting)
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getId)
                 .comparing(Address::getCity)
                 .comparing(Address::getLatitude)
+            .comparing(Address::isExisting)
                 .areEqual());
 
         assertFalse(EqualsBuilder.test(address1, address2)
                 .comparing(Address::getPhone)
                 .comparing(Address::getCity)
                 .comparing(Address::getLatitude)
+            .comparing(Address::isExisting)
                 .areEqual());
+
+        assertFalse(EqualsBuilder.test(address1, address2)
+            .comparing(Address::isExisting)
+            .comparing(Address::getPhone)
+            .comparing(Address::getCity)
+            .comparing(Address::getLatitude)
+            .areEqual());
     }
 
     private static class Registry {
@@ -233,8 +254,8 @@ public class EqualsBuilderTest {
 
     @Test
     public void deepCompare() {
-        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
-        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "first", "Somewhere else");
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", true);
+        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "first", "Somewhere else", true);
         Person person1 = new Person(1);
         Person person2 = new Person(1);
 
@@ -468,10 +489,10 @@ public class EqualsBuilderTest {
                         .areEqual())
                 .areEqual());
 
-        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere");
-        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "second", "Somewhere else");
-        Address address3 = new Address(1, 123123L, 23.4F, 25.6, "third", "Somewhere");
-        Address address4 = new Address(2, 123123L, 23.4F, 25.6, "forth", "Somewhere else");
+        Address address1 = new Address(1, 123123L, 23.4F, 25.6, "first", "Somewhere", true);
+        Address address2 = new Address(2, 123123L, 23.4F, 25.6, "second", "Somewhere else", true);
+        Address address3 = new Address(1, 123123L, 23.4F, 25.6, "third", "Somewhere", true);
+        Address address4 = new Address(2, 123123L, 23.4F, 25.6, "forth", "Somewhere else", true);
 
         assertTrue(EqualsBuilder.test(new Index(asList(address1, address2)), new Index(asList(address1, address2)))
                 .comparingMaps(Index::getAddressMap, (a, b) -> EqualsBuilder.test(a, b)
