@@ -264,7 +264,7 @@ public class EqualsBuilder<T> {
             K key = e.getKey();
             R value = e.getValue();
             if (value == null) {
-                if (mb.get(key) != null || !ma.containsKey(key)) {
+                if (mb.get(key) != null || !mb.containsKey(key)) {
                     skip = true;
                     equal = false;
                     return this;
