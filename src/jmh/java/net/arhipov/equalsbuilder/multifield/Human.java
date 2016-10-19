@@ -1,4 +1,4 @@
-package net.arhipov.equalsbuilder;
+package net.arhipov.equalsbuilder.multifield;
 
 import java.util.List;
 import java.util.Map;
