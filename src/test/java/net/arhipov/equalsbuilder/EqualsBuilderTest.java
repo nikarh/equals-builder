@@ -533,23 +533,36 @@ public class EqualsBuilderTest {
                 .comparingMaps(AtomicReference::get, Objects::equals)
                 .areEqual());
 
-        map2.replace(null, 1);
-
-        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
-                .comparingMaps(AtomicReference::get, Objects::equals)
-                .areEqual());
-
         map1.remove(null);
 
         assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
                 .comparingMaps(AtomicReference::get, Objects::equals)
                 .areEqual());
 
-        map2.remove(null);
-        map2.replace(1, 42);
+        map1.clear();
+        map2.clear();
+        map1.put(1, null);
+        map2.put(1, 42);
 
         assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
                 .comparingMaps(AtomicReference::get, Objects::equals)
                 .areEqual());
+
+        map1.clear();
+        map2.clear();
+        map1.put(null, null);
+
+        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+            .comparingMaps(AtomicReference::get, Objects::equals)
+            .areEqual());
+
+        map1.clear();
+        map2.clear();
+        map1.put(null, 1);
+        map2.put(null, null);
+
+        assertFalse(EqualsBuilder.test(new AtomicReference<>(map1), new AtomicReference<>(map2))
+            .comparingMaps(AtomicReference::get, Objects::equals)
+            .areEqual());
     }
 }
